@@ -215,13 +215,24 @@ quantity purchased.
 
 --------------------------------------------------------------------------------------------------------
 CREATE TABLE customer(
-
+   custid,
+   firstname,
+   middlename,
+   lastname,
+   mobilenumber,
+   dob
 )
 
 CREATE TABLE item(
-
+ itemid,
+ itemname,
+ qoh,
+ price
 )
 
 CREATE TABLE purchase(
-
+custid
+itemid
+dateofpur
+qp
 )
