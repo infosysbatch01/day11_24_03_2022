@@ -335,6 +335,80 @@ In CHAR , if size is more than the string stored, the extra trailing locations a
 In VARCHAR2 if the size is more than the string stored , the extra trailing locations are not filled with space.
 So while providing the where clause for an attribute which is of type char , iff  the compared value
 is having smaller size as that of declaration we may compare the data with or without trailing space.
+------------------------------------------------------------------------------------------------------------------
+CREATE TABLE employeedetails(
+         empid VARCHAR2(5) PRIMARY KEY,
+         empname VARCHAR2(20) NOT NULL,
+         desig VARCHAR2(20) CHECK (desig IN('Mgr','AsstMgr','VP')),
+         dept VARCHAR2(20) CHECK (dept IN('Sales','Mkt','HR')),
+         basic INTEGER check (basic>=10000 AND basic<=50000),
+         doj DATE
+         );
+
+
+   INSERT INTO employeedetails VALUES('E0001','Rajesh','Mgr','Sales',30000,'12-nov-2010');
+   INSERT INTO employeedetails VALUES('E0002','Raj','Mgr','Sales',29000,null);
+   INSERT INTO employeedetails VALUES('E0003','Rohit','AsstMgr','Sales',20000,'14-jul-1980');
+   INSERT INTO employeedetails VALUES('E0004','Amit','Mgr','Sales',30000,null);
+   INSERT INTO employeedetails VALUES('E0005','Mohan','Mgr','Sales',29000,null);
+   INSERT INTO employeedetails VALUES('E0006','Surender','VP','Mkt',20000,'21-mar-1999');
+
+Q For all the employees give an increment of 1000 to the basic.
+A UPDATE employeedetails SET basic=basic+1000;
+
+Q For all the managers give an increment of 50%.
+A UPDATE employeedetails SET basic=basic+basic*.5 WHERE desig='Mgr';
+
+Q For the employee E0003 change the designation from AsstMgr to Mgr and have an increment of 10000.
+A UPDATE employeedetails SET desig='Mgr',basic=basic+10000 WHERE empid='E0003'; 
+
+
+UPDATE employeedetails SET desig='Manager',basic=basic+10000 WHERE empid='E0003'; 
+[ If we have check constraint or other constraints with the table than that constraint is being 
+  considered during the updation. If the updated value is not following the constraint, record
+  won't be updated due to the constraint not being followed.]
+
+UPDATE employeedetails SET doj=NULL WHERE empid='E0006';
+
+here = is not used for comparison, it is used for assignment.So = can be used with NULL.
+
+SELECT * FROM employeedetails
+WHERE doj=NULL
+
+In the above command we are using = for comparison. Null cannot be compared with Null with =.
+For that we have to use IS NULL
+
+SELECT * FROM employeedetails
+WHERE doj IS NULL;
+
+------------------------------------------------------------------------------------------------------
+
+CREATE TABLE employeedetails(
+         empid VARCHAR2(5) PRIMARY KEY,
+         empname VARCHAR2(20) NOT NULL,
+         desig VARCHAR2(20) CHECK (desig IN('Mgr','AsstMgr','VP')),
+         dept VARCHAR2(20) CHECK (dept IN('Sales','Mkt','HR')),
+         basic INTEGER check (basic>=10000 AND basic<=50000),
+         doj DATE
+         );
+
+
+   INSERT INTO employeedetails VALUES('E0001','Rajesh','Mgr','Sales',30000,'12-nov-2010');
+   INSERT INTO employeedetails VALUES('E0002','Raj','Mgr','Sales',29000,null);
+   INSERT INTO employeedetails VALUES('E0003','Rohit','AsstMgr','Sales',20000,'14-jul-1980');
+   INSERT INTO employeedetails VALUES('E0004','Amit','Mgr','Sales',30000,null);
+   INSERT INTO employeedetails VALUES('E0005','Mohan','Mgr','Sales',29000,null);
+   INSERT INTO employeedetails VALUES('E0006','Surender','VP','Mkt',20000,'21-mar-1999');
+
+Q Delete the employee details for the employee whose id is E0001. 
+DELETE FROM employeedetails WHERE empid='E0001';
+
+Q Delete the employee details for the employee whose designation is VP.
+DELETE FROM employeedetails WHERE desig='VP';
+
+Q Delete all the records from employeedetails.
+DELETE FROM employeedetails;
+-----------------------------------------------------------------------------------------------------
 
 
 
