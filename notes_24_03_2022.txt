@@ -1,6 +1,4 @@
-
-
-   Column level constraint
+ Column level constraint
        Applied when column is mentioned or declared.Column level constraint
        is not mandatory to write when we are writing the constraint and
        constraint is just dependent on one column
@@ -199,6 +197,20 @@ inserting the data, we inserted a string.
  INSERT INTO employeedetails VALUES('E0001','eename='rajesh';
   -- It wont show any of the rows as we are writing r in lowercase but in the table while storing 
   we stored R in uppercase for rajesh.  
+-------------------------------------------------------------------------------------------------
+We need to design an application for a shop. We need to store the customer details like firstname,middlename,lastname,mobilenumber,dob,city
 
+   firstname,lastname,mobilenumber,dob cannot be null. 
+   For city default value will be Delhi.
+   We need to identify customer uniquely. 
 
+We need to store the details related to the items in the store/shop. Like itemname,QOH,priceoftheitem.
+so itemname cannnot be null, Qoh should be more than 100.
+Price of the item should not be 0 or less than 0.
 
+We need to store the details of day to day sell like customerid,itemid , dateofpurchase and
+quantity purchased.
+
+     date of purchase cannot be null and quantity purchased cannot be 0 or less than 0.
+
+--------------------------------------------------------------------------------------------------
