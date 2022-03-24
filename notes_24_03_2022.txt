@@ -503,49 +503,49 @@ SS	Second (0-59).
 
 The following are date examples for the TO_CHAR function.
 
-TO_CHAR(sysdate, 'yyyy/mm/dd')
+SELECT TO_CHAR(sysdate, 'yyyy/mm/dd') FROM dual;
 Result: '2003/07/09'
 
-TO_CHAR(sysdate, 'Month DD, YYYY')
+SELECT TO_CHAR(sysdate, 'Month DD, YYYY') FROM dual;
 Result: 'July 09, 2003'
 
 
-TO_CHAR(sysdate, 'MON DDth, YYYY')
+SELECT TO_CHAR(sysdate, 'MON DDth, YYYY') FROM dual;
 Result: 'JUL 09TH, 2003'
 
 
 You will notice that in some TO_CHAR function examples, the format_mask parameter begins with "FM". This means that zeros and blanks are suppressed. This can be seen in the examples below.
 
-TO_CHAR(sysdate, 'FMMonth DD, YYYY')
+SELECT TO_CHAR(sysdate, 'FMMonth DD, YYYY') FROM dual;
 Result: 'July 9, 2003'
 
-TO_CHAR(sysdate, 'FMMON DDth, YYYY')
+SELECT TO_CHAR(sysdate, 'FMMON DDth, YYYY') FROM dual;
 Result: 'JUL 9TH, 2003'
 
-TO_CHAR(sysdate, 'FMMon ddth, YYYY')
+SELECT TO_CHAR(sysdate, 'FMMon ddth, YYYY') FROM dual;
 Result: 'Jul 9th, 2003'
 
 ----------------------------------
-TO_DATE('2003/07/09', 'yyyy/mm/dd')
+SELECT TO_DATE('2003/07/09', 'yyyy/mm/dd') FROM dual;
 Result: date value of July 9, 2003
 
-TO_DATE('070903', 'MMDDYY')
+SELECT TO_DATE('070903', 'MMDDYY') FROM dual;
 Result: date value of July 9, 2003
 
-TO_DATE('20020315', 'yyyymmdd')
+SELECT TO_DATE('20020315', 'yyyymmdd') FROM dual;
 Result: date value of Mar 15, 2002
 You could use the TO_DATE function with the dual table as follows:
 
 SELECT TO_DATE('2015/05/15 8:30:25', 'YYYY/MM/DD HH:MI:SS')
 FROM dual;
 --------------------------------------------------------------------------------------------
-TO_NUMBER('1210.73', '9999.99')
+SELECT TO_NUMBER('1210.73', '9999.99') FROM dual;
 Result: 1210.73
 
-TO_NUMBER('546', '999')
+SELECT TO_NUMBER('546', '999') FROM dual;
 Result: 546
 
-TO_NUMBER('23', '99')
+SELECT TO_NUMBER('23', '99') FROM dual;
 Result: 23
 -------------------------------------------------------------------------------------
 
@@ -553,32 +553,32 @@ Result: 23
 Description
 The Oracle/PLSQL CEIL function returns the smallest integer value that is greater than or equal to a number.
 
-CEIL(32.65)
+SELECT CEIL(32.65) FROM DUAL;
 Result: 33
 
-CEIL(32.1)
+SELECT CEIL(32.1) FROM dual;
 Result: 33
 
-CEIL(32)
+SELECT CEIL(32) FROM dual;
 Result: 32
 
-CEIL(-32.65)
+SELECT CEIL(-32.65) FROM dual;
 Result: -32
 
-CEIL(-32)
+SELECT CEIL(-32) FROM dual;
 Result: -32
 
 -------------------------------------------------------------------
 Description
 The Oracle/PLSQL FLOOR function returns the largest integer value that is equal to or less than a number.
 
-FLOOR(5.9)
+SELECT FLOOR(5.9) FROM dual;
 Result: 5
 
-FLOOR(34.29)
+SELECT FLOOR(34.29) FROM dual;
 Result: 34
 
-FLOOR(-5.9)
+SELECT FLOOR(-5.9) FROM dual;
 Result: -6
 -------------------------------------
 
