@@ -236,3 +236,105 @@ itemid
 dateofpur
 qp
 )
+
+-----------------------------------------------------------------------------------------------------
+
+CREATE TABLE employeedetails(
+         empid VARCHAR2(5) PRIMARY KEY,
+         empname VARCHAR2(20) NOT NULL,
+         desig VARCHAR2(20) CHECK (desig IN('Mgr','AsstMgr','VP')),
+         dept VARCHAR2(20) CHECK (dept IN('Sales','Mkt','HR')),
+         basic INTEGER check (basic>=10000 AND basic<=50000),
+         doj DATE
+         );
+
+
+   INSERT INTO employeedetails VALUES('E0001','Rajesh','Mgr','Sales',30000,'12-nov-2010');
+   INSERT INTO employeedetails VALUES('E0002','Raj','Mgr','Sales',29000,null);
+   INSERT INTO employeedetails VALUES('E0003','Rohit','AsstMgr','Sales',20000,'14-jul-1980');
+   INSERT INTO employeedetails VALUES('E0004','Amit','Mgr','Sales',30000,null);
+   INSERT INTO employeedetails VALUES('E0005','Mohan','Mgr','Sales',29000,null);
+   INSERT INTO employeedetails VALUES('E0006','Surender','VP','Mkt',20000,'21-mar-1999');
+
+--------------------------------------------------------------------------------------------
+Q Why we need to use where clause?
+A To restrict the number of records based on some condition
+
+Q Display all the columns for all the records.
+A SELECT * FROM employeedetails;
+
+Q Display all the columns for the designation Mgr only.
+A SELECT * FROM employeedetails WHERE desig='Mgr';
+
+Q Display all the columns for the designation Mgr from Sales department.
+A SELECT * FROM employeedetails WHERE desig='Mgr' AND dept='Sales';
+
+Q Display empid,empname for the designation Mgr from Sales department.
+A SELECT empid,empname FROM employeedetails WHERE desig='Mgr' and dept='Sales';
+[ If I use or in the above statement which means Mgr from any Dept and any designation from Sales.]
+Q Display empid,empname and desig for Mgr or AsstMgr
+A SELECT empid,empname,desig FROM employeedetails WHERE desig='Mgr' OR desig='AsstMgr';
+  OR
+ SELECT empid,empname,desig FROM employeedetails WHERE desig IN('Mgr','AsstMgr');
+ 
+Q Display empid,empname and basic where basic is equivalent 10000 or more than 10000 and equivalent to
+  20000 and less than 20000.
+A SELECT empid,empname,basic FROM employeedetails WHERE basic>=10000 AND basic<=20000;
+[ If we put OR in the above statement , than it will satisfy any value which is more than 10000 and
+  any value which is less than 20000 .Ultimately it matches all the records.]
+ OR
+  SELECT empid,empname,basic FROM employeedetails WHERE basic BETWEEN 10000 and 20000; 
+ [ Inclusive the value 10000 and 20000]
+Q SELECT empid empname and basic where basic is not between 10000 and 20000.
+A SELECT empid,empname,basic FROM employeedetails WHERE basic IS NOT BETWEEN 10000 AND 20000;
+
+Q SELECT empid,empname for those employees for whom we dont have doj.
+A SELECT empid,empname FROM employeedetails WHERE doj IS NULL;
+[ We cannot equate anything with NULL So writing SELECT empid,empname FROM employeedetails WHERE doj=NULL is incorrect]
+Q SELECT empid,empname FROM employeedetails WHERE employees are having date of joining.
+A SELECT empid,empname FROM employeedetails WHERE doj IS NOT NULL;
+
+Q SELECT empid,empname WHERE employee's name starts with R.
+A SELECT empid,empname WHERE empname LIKE 'R%';
+[ % matches 0 or more characters ]
+Q SELECT empid,empname WHERE employee's name is not starting with R.
+A SELECT empid,empname WHERE empname NOT LIKE 'R%';
+
+Q SELECT empid,empname WHERE employee's name ends with n.
+A SELECT empid,empname WHERE empname LIKE '%n';
+
+Q SELECT empid,empname WHERE employee's name starts with R followed by exactly 2 characters.
+A SELECT empid,empname WHERE empname LIKE 'R__'; -- We have 2 underscores after R
+[ _ replaces a single character at time]
+
+Q Display empid,empname,basic and HRA ( which is calculated from basic as 4% of basic).
+A SELECT empid,empname,basic,basic*0.04 HRA FROM employeedetails;
+
+Q Display empid,empname,basic,hra ( which is calculated from basic as 4% of basic) for 
+  the employees where the hra is 400
+A SELECT empid,empname,basic,basic*0.04 HRA FROM employeedetails
+  WHERE basic*0.04=400;
+
+Q Display empid,empname,basic,hra ( which is calculated from basic as 4% of basic) for 
+  the employees where the hra more than 1000.
+A SELECT empid,empname,basic,basic*0.04 HRA FROM employeedetails
+  WHERE basic*0.04>1000;
+
+Q Display empid,empname where the basic is more than 10000.
+A SELECT empid,empname FROM employeedetails WHERE basic>10000;
+
+Q Display empid for the employee whose name is Ram.
+A SELECT empid FROM employeedetails WHERE empname='Ram';
+
+To see the table structure we have a command
+DESC <tablename>
+DESC employee
+
+------------------------------------------------------------------------------
+In CHAR , if size is more than the string stored, the extra trailing locations are filled with space.
+In VARCHAR2 if the size is more than the string stored , the extra trailing locations are not filled with space.
+So while providing the where clause for an attribute which is of type char , iff  the compared value
+is having smaller size as that of declaration we may compare the data with or without trailing space.
+
+
+
